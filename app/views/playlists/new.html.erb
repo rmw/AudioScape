@@ -1,0 +1,13 @@
+<% if @playlist %>
+  <ul>
+  <% @playlist.errors.full_messages.each do |error_msg| %>
+    <li><%= error_msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @playlist do |f| %>
+	Title: <%= f.text_field :title %>
+
+	<%= f.submit :class => 'button small' %>
+<% end %>

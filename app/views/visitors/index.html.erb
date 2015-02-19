@@ -1,0 +1,30 @@
+<div class="something">
+  <div class="welcome"><p><%= current_user.username.capitalize %>'s recent playlists</p></div>
+  <div class="user_playlists">
+    <% @playlists.each do |playlist| %>
+      <img class="searchart" src="<%= playlist.art_url %>"/>
+      <%= link_to playlist.title, playlist_path(playlist) %></br>
+    <% end %>
+  </div>
+  <div class="random_playlist" id='playlist'>
+    <p class="welcome">Random Songs Around You</p>
+      <ul>
+        <% if find_random_local_songs.class.name == "Array" %>
+          <% find_random_local_songs.each do |song| %>
+            <%= render partial: 'songs/mini_groove_song_card', locals: {playlist: song.playlist, track: song, title: song.title, artist: song.artist, url: groove_session.get_song_url_by_id(song.link), coverart: song.coverart} %>
+          <% end %>
+        <% else %>
+          <p class="result"><%= find_random_local_songs %><p>
+        <% end %>
+  </div>
+
+  <ul class="button-group even-2">
+
+
+    <li><%= link_to "View Nearby Playlists", playlists_find_path, :class => 'button small', :id => 'find-playlist' %></li>
+    <li><%= link_to "Create A New Playlist", new_playlist_path, :class => 'button small', :id => 'new-playlist'  %></li>
+  </ul>
+
+</div>
+
+
